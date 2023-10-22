@@ -1,12 +1,3 @@
-# Api Code Challenge
-
-API for storing DNS records (IP addresses) belonging to hostnames done using Ruby on Rails 6 and PostgreSql.
-
-### Requirements
-
-You can run this project using docker-compose if you don't want to mess up with
-your own machine. The guide below will be for using docker-compose.
-
 ### Installation
 
 Follow the steps below
@@ -14,7 +5,7 @@ Follow the steps below
 ```sh
 $ Clone the repo
 
-$ cd api_code_challenge
+$ cd dns-api
 
 $ docker-compose build
 
