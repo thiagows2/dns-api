@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20_231_022_161_427) do
   enable_extension 'plpgsql'
 
   create_table 'dns_records', force: :cascade do |t|
-    t.string 'ip_address'
+    t.string 'ip'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20_231_022_161_427) do
 
   create_table 'hostnames', force: :cascade do |t|
     t.string 'hostname'
-    t.integer 'dns_record_count', default: 0
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
   end
