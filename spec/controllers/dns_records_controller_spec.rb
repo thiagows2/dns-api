@@ -351,6 +351,50 @@ RSpec.describe Api::V1::DnsRecordsController, type: :controller do
   end
 
   describe '#create' do
-    # TODO
+    let(:ip1) { '1.1.1.1' }
+    let(:lorem) { 'lorem.com' }
+
+    context 'when valid params are passed' do
+      let(:params) do
+        {
+          dns_records: {
+            ip: ip1,
+            hostnames_attributes: [{ hostname: lorem }]
+          }
+        }
+      end
+      let(:perform_request) { post :create, params: params }
+
+      it 'creates a new DNS record' do
+        expect { perform_request }.to change { DnsRecord.count }.by(1)
+      end
+
+      it 'returns a 201 status code' do
+        perform_request
+        expect(response).to have_http_status(:created)
+      end
+    end
+
+    context 'when invalid params are passed' do
+      let(:params) do
+        {
+          dns_records: {
+            ip: nil
+          }
+        }
+      end
+
+      before do
+        post :create, params: params
+      end
+
+      it 'returns a 422 status code' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'returns the errors as JSON' do
+        expect(parsed_body).to eq({ ip: ["can't be blank"] })
+      end
+    end
   end
 end
